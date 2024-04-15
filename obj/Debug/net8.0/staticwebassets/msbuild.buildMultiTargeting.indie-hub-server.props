@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\indie-hub-server.props" />
+</Project>
