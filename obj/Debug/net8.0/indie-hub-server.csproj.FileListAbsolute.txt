@@ -103,3 +103,4 @@ C:\Users\danilo\source\repos\indie-hub-server\obj\Debug\net8.0\indie-hub-server.
 C:\Users\danilo\source\repos\indie-hub-server\obj\Debug\net8.0\indie-hub-server.genruntimeconfig.cache
 C:\Users\danilo\source\repos\indie-hub-server\obj\Debug\net8.0\ref\indie-hub-server.dll
 C:\Users\danilo\source\repos\indie-hub-server\obj\Debug\net8.0\indie-hub-server.sourcelink.json
+C:\Users\danilo\source\repos\indie-hub-server\bin\Debug\net8.0\System.Security.Permissions.dll
