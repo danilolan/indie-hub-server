@@ -17,7 +17,7 @@ namespace indie_hub_server.Controllers
         }
 
         // GET: api/Users
-        [HttpGet("rota1")]
+        [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
             return Ok(await _context.Users.ToListAsync());
