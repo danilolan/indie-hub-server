@@ -1,11 +1,13 @@
-﻿using Microsoft.AspNetCore.Identity;
-namespace indie_hub_server.Models.Services
+﻿using indie_hub_server.Models;
+using Microsoft.AspNetCore.Identity;
+
+namespace indie_hub_server.Services
 {
-    public class UserService
+    public class AuthService
     {
         private readonly PasswordHasher<User> _passwordHasher;
 
-        public UserService()
+        public AuthService()
         {
             _passwordHasher = new PasswordHasher<User>();
         }

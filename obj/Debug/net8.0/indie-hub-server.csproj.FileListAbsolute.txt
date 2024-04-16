@@ -104,3 +104,11 @@ C:\Users\danilo\source\repos\indie-hub-server\obj\Debug\net8.0\indie-hub-server.
 C:\Users\danilo\source\repos\indie-hub-server\obj\Debug\net8.0\ref\indie-hub-server.dll
 C:\Users\danilo\source\repos\indie-hub-server\obj\Debug\net8.0\indie-hub-server.sourcelink.json
 C:\Users\danilo\source\repos\indie-hub-server\bin\Debug\net8.0\System.Security.Permissions.dll
+C:\Users\danilo\source\repos\indie-hub-server\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\danilo\source\repos\indie-hub-server\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\danilo\source\repos\indie-hub-server\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\danilo\source\repos\indie-hub-server\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\danilo\source\repos\indie-hub-server\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\danilo\source\repos\indie-hub-server\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\danilo\source\repos\indie-hub-server\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\danilo\source\repos\indie-hub-server\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll

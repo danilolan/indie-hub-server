@@ -1,16 +1,18 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace indie_hub_server.Dtos.User
+namespace indie_hub_server.Dtos
 {
-    public class UserResponseDTO
+    public class SignInDto
     {
-        public int Id { get; set; }
-        public string Username { get; set; }
+        [Required]
+        [EmailAddress]
+        [StringLength(100)]
         public string Email { get; set; }
-        public bool IsActive { get; set; }
+        [Required]
+        public string Password { get; set; }
     }
 
-    public class CreateUserDTO
+    public class SignUpDTO
     {
         [Required]
         [StringLength(50)]
@@ -25,17 +27,8 @@ namespace indie_hub_server.Dtos.User
         public string Password { get; set; }
     }
 
-    public class UpdateUserDTO
+    public class AuthResponseDTO
     {
-        [Required]
-        [StringLength(50)]
-        public string Username { get; set; }
-
-        [Required]
-        [EmailAddress]
-        [StringLength(100)]
-        public string Email { get; set; }
-
-        public string Password { get; set; }
+        public string Token { get; set; }
     }
 }

@@ -1,14 +1,16 @@
 ﻿using indie_hub_server.Dtos.User;
 using indie_hub_server.Models;
-using indie_hub_server.Models.Services;
+using indie_hub_server.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using System.Security.Claims;
 
 namespace indie_hub_server.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
     {
@@ -20,28 +22,19 @@ namespace indie_hub_server.Controllers
         }
 
         // GET: api/Users
+        [Authorize]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UserResponseDTO>>> GetUsers()
+        public async Task<ActionResult<UserResponseDTO>> GetUserFromToken()
         {
-            var users = await _context.Users
-                .Select(user => new UserResponseDTO
-                {
-                    Id = user.Id,
-                    Username = user.Username,
-                    Email = user.Email,
-                    IsActive = user.IsActive
-                })
-                .ToListAsync();
+            var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
 
-            return Ok(users);
-        }
+            if (userId == null)
+            {
+                return Unauthorized("No valid token provided.");
+            }
 
-        // GET: api/Users/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<UserResponseDTO>> GetUser(int id)
-        {
             var user = await _context.Users
-                .Where(u => u.Id == id)
+                .Where(u => u.Id.ToString() == userId)
                 .Select(u => new UserResponseDTO
                 {
                     Id = u.Id,
@@ -49,84 +42,52 @@ namespace indie_hub_server.Controllers
                     Email = u.Email,
                     IsActive = u.IsActive
                 })
-                .FirstOrDefaultAsync();
+                .SingleOrDefaultAsync();
 
             if (user == null)
             {
-                return NotFound();
+                return NotFound("User not found.");
             }
 
             return Ok(user);
         }
 
-
-        [HttpPost]
-        public async Task<ActionResult<UserResponseDTO>> PostUser([FromBody] CreateUserDTO newUser)
-        {
-            bool emailExists = await _context.Users.AnyAsync(u => u.Email == newUser.Email);
-            if (emailExists)
-            {
-                return BadRequest("Email already in use.");
-            }
-
-            UserService userService = new UserService();
-            var user = new User
-            {
-                Username = newUser.Username,
-                Email = newUser.Email,
-                PasswordHash = userService.HashPassword(null, newUser.Password),
-                IsActive = true,
-                CreatedAt = DateTime.UtcNow,
-                UpdatedAt = DateTime.UtcNow
-            };
-
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
-
-            var response = new UserResponseDTO
-            {
-                Id = user.Id,
-                Username = user.Username,
-                Email = user.Email,
-                IsActive = user.IsActive
-            };
-
-            return CreatedAtAction(nameof(GetUser), new { id = user.Id }, response);
-        }
-
-
-
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, [FromBody] UpdateUserDTO updatedUser)
+        [Authorize]
+        [HttpPut]
+        public async Task<IActionResult> PutUser([FromBody] UpdateUserDTO updatedUser)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var user = await _context.Users.FindAsync(id);
-            if (user == null)
+            var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            var userEmailClaim = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+
+            if (string.IsNullOrEmpty(userIdClaim) || string.IsNullOrEmpty(userEmailClaim))
             {
-                return NotFound();
+                return Unauthorized("Invalid token.");
             }
 
-            if (_context.Users.Any(u => u.Email == updatedUser.Email && u.Id != id))
+            if (!int.TryParse(userIdClaim, out int userId))
+            {
+                return BadRequest("User ID is invalid.");
+            }
+
+            var user = await _context.Users.FindAsync(userId);
+            if (user == null)
+            {
+                return NotFound("User not found.");
+            }
+
+            if (_context.Users.Any(u => u.Email == userEmailClaim && u.Id != userId))
             {
                 return BadRequest("Email already in use by another account.");
             }
 
             user.Username = updatedUser.Username;
-            user.Email = updatedUser.Email;
-
-            if (!string.IsNullOrEmpty(updatedUser.Password))
-            {
-                UserService userService = new UserService();
-                user.PasswordHash = userService.HashPassword(user, updatedUser.Password);
-                _context.Entry(user).Property(u => u.PasswordHash).IsModified = true;
-            }
 
             _context.Entry(user).Property(u => u.Username).IsModified = true;
-            _context.Entry(user).Property(u => u.Email).IsModified = true;
 
             try
             {
@@ -134,7 +95,7 @@ namespace indie_hub_server.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserExists(id))
+                if (!UserExists(userId))
                 {
                     return NotFound();
                 }
@@ -143,24 +104,6 @@ namespace indie_hub_server.Controllers
                     throw;
                 }
             }
-
-            return NoContent();
-        }
-
-
-
-        // DELETE: api/Users/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(int id)
-        {
-            var user = await _context.Users.FindAsync(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
 
             return NoContent();
         }
