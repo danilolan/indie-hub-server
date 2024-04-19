@@ -23,7 +23,7 @@ namespace indie_hub_server.Controllers
         }
 
         [HttpPost("signin")]
-        public async Task<IActionResult> Login([FromBody] SignInDto login)
+        public async Task<IActionResult> SignIn([FromBody] SignInDto login)
         {
             var user = await _context.Users
                 .SingleOrDefaultAsync(u => u.Email == login.Email);

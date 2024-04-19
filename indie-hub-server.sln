@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34714.143
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "indie-hub-server", "indie-hub-server.csproj", "{9EEBAA81-7EB5-42F4-80D8-6A1C022823CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "indie-hub-server", "indie-hub-server.csproj", "{9EEBAA81-7EB5-42F4-80D8-6A1C022823CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "controllers-test", "..\controllers-test\controllers-test.csproj", "{A1C1D2AB-2D4D-445A-B47D-8B26C04CF5A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{9EEBAA81-7EB5-42F4-80D8-6A1C022823CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9EEBAA81-7EB5-42F4-80D8-6A1C022823CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9EEBAA81-7EB5-42F4-80D8-6A1C022823CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1C1D2AB-2D4D-445A-B47D-8B26C04CF5A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1C1D2AB-2D4D-445A-B47D-8B26C04CF5A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1C1D2AB-2D4D-445A-B47D-8B26C04CF5A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1C1D2AB-2D4D-445A-B47D-8B26C04CF5A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
