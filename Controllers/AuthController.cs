@@ -47,7 +47,7 @@ namespace indie_hub_server.Controllers
         }
 
         [HttpPost("signup")]
-        public async Task<ActionResult<UserResponseDTO>> SignUp([FromBody] SignUpDTO newUser)
+        public async Task<ActionResult<User>> SignUp([FromBody] SignUpDTO newUser)
         {
             bool emailExists = await _context.Users.AnyAsync(u => u.Email == newUser.Email);
             if (emailExists)

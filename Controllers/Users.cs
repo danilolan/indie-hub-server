@@ -24,7 +24,7 @@ namespace indie_hub_server.Controllers
         // GET: api/Users
         [Authorize]
         [HttpGet]
-        public async Task<ActionResult<UserResponseDTO>> GetUserFromToken()
+        public async Task<ActionResult<User>> GetUserFromToken()
         {
             var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
 
@@ -35,7 +35,7 @@ namespace indie_hub_server.Controllers
 
             var user = await _context.Users
                 .Where(u => u.Id.ToString() == userId)
-                .Select(u => new UserResponseDTO
+                .Select(u => new User
                 {
                     Id = u.Id,
                     Username = u.Username,
@@ -54,7 +54,7 @@ namespace indie_hub_server.Controllers
 
         [Authorize]
         [HttpPut]
-        public async Task<IActionResult> PutUser([FromBody] UpdateUserDTO updatedUser)
+        public async Task<IActionResult> PutUser([FromBody] UserUpdateDTO updatedUser)
         {
             if (!ModelState.IsValid)
             {

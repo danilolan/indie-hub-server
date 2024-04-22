@@ -20,6 +20,9 @@ namespace indie_hub_server.Models
         public string? Description { get; set; }
 
         [Required]
+        public string? GameFileUrl { get; set; }
+
+        [Required]
         public DateTime StartDate { get; set; }
 
         [Required]
