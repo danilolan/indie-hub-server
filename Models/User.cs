@@ -15,7 +15,7 @@ namespace indie_hub_server.Models
         [Required]
         [EmailAddress]
         [StringLength(100)]
-        public string Email { get; set; } = string.Empty; 
+        public string Email { get; set; } = string.Empty;
 
         [Required]
         public string PasswordHash { get; set; } = string.Empty;
@@ -27,5 +27,7 @@ namespace indie_hub_server.Models
 
         [Required]
         public bool IsActive { get; set; } = true;
+
+        public ICollection<Playtest>? Playtests { get; set; }
     }
 }
