@@ -22,6 +22,25 @@ namespace indie_hub_server.Dtos.Playtest
         public DateTime EndDate { get; set; }
     }
 
+    public class PlaytestUpdateDTO
+    {
+        [Required]
+        [StringLength(100)]
+        public string? Title { get; set; }
+
+        [Required]
+        public string? Description { get; set; }
+
+        [Required]
+        public string? GameFileUrl { get; set; }
+
+        [Required]
+        public DateTime StartDate { get; set; }
+
+        [Required]
+        public DateTime EndDate { get; set; }
+    }
+
     public class PlaytestResponseDTO
     {
         public int Id { get; set; }

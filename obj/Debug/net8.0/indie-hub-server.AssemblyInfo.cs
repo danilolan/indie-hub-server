@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("indie-hub-server")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+618411537c67b8653a045ed9a2b60b12f146aeb2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8fc08e3fd385df6cd16179badd9ad0760ed9eda4")]
 [assembly: System.Reflection.AssemblyProductAttribute("indie-hub-server")]
 [assembly: System.Reflection.AssemblyTitleAttribute("indie-hub-server")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
